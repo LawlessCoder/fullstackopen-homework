@@ -4,13 +4,17 @@ const Header = ({course_name}) => {
   )
 }
 
+const Part = ({part_name, num_of_exercises}) => {
+  return (
+    <p>{part_name} {num_of_exercises}</p>
+  )
+}
+
 const Content = ({course_parts}) => {
   return (
     <>
-      {course_parts.map(({id, part_name, num_of_exercises}) => ( 
-        <p key={id}>
-         {part_name} {num_of_exercises}
-        </p>
+      {course_parts.map(part => ( 
+        <Part key={part.id} part_name={part.part_name} num_of_exercises={part.num_of_exercises} />
       ))}
     </>
   )
