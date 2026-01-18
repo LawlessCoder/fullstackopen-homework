@@ -16,6 +16,16 @@ const Content = ({course_parts}) => {
   )
 }
 
+const Total = ({course_parts}) => {
+  return (
+    <p>
+      Number of exercises {course_parts.reduce((sum, part) => {
+        return sum + part.num_of_exercises;
+      }, 0)}
+    </p>
+  )
+}
+
 const App = () => {
   const course = 'Half Stack application development'
   const course_parts = [
@@ -28,6 +38,7 @@ const App = () => {
     <div>
       <Header course_name={course} />
       <Content course_parts={course_parts} />
+      <Total course_parts={course_parts} />
     </div>
   )
 }
