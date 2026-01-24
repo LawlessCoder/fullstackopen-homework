@@ -10,7 +10,7 @@ const Button = ({selected, setSelected, length}) => {
     return
   }
   return (
-    <button onClick={handleClick}>click me</button>
+    <button onClick={handleClick}>next anecdote</button>
   )
 }
 
