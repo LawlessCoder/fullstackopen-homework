@@ -45,6 +45,7 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the Day</h1>
       <p>{anecdotes[selected]}</p>
       <p>Current votes: {votes[selected]}</p>
       <SelectButton selected={selected} setSelected={setSelected} length={anecdotes.length}/>
