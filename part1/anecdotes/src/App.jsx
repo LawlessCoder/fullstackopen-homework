@@ -14,6 +14,18 @@ const Button = ({selected, setSelected, length}) => {
   )
 }
 
+const VoteButton = ({currentVotes, setVotes, currentAnecdote}) => {
+  const handleClick = () => {
+    let newVotes = {...currentVotes};
+    newVotes[currentAnecdote] += 1;
+    setVotes(newVotes);
+  }
+  return (
+    <button onClick={handleClick}>vote</button>
+  )
+}
+
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -25,13 +37,18 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
+
+  let initialVotes = Array(anecdotes.length).fill(0);
    
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(initialVotes);
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>      
+      <p>{anecdotes[selected]}</p>
+      <p>Current votes: {votes[selected]}</p>
       <Button selected={selected} setSelected={setSelected} length={anecdotes.length}/>
+      <VoteButton currentVotes={votes} setVotes={setVotes} currentAnecdote={selected} />
     </div>
   )
 }
