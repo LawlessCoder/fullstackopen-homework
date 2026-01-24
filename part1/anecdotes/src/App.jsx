@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Button = ({selected, setSelected, length}) => {
+const SelectButton = ({selected, setSelected, length}) => {
   const handleClick = () => {
     let newSelected = selected;
     while (newSelected === selected) {
@@ -47,7 +47,7 @@ const App = () => {
     <div>
       <p>{anecdotes[selected]}</p>
       <p>Current votes: {votes[selected]}</p>
-      <Button selected={selected} setSelected={setSelected} length={anecdotes.length}/>
+      <SelectButton selected={selected} setSelected={setSelected} length={anecdotes.length}/>
       <VoteButton currentVotes={votes} setVotes={setVotes} currentAnecdote={selected} />
     </div>
   )
