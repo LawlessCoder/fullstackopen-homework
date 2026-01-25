@@ -25,6 +25,54 @@ const VoteButton = ({currentVotes, setVotes, currentAnecdote}) => {
   )
 }
 
+const DisplayMaxAnecdotes = ({votes, anecdotes}) => {
+  function indexOfMax(arr) {
+    if (arr.length === 0) {
+      return -1;
+    }
+
+    var max = arr[0];
+    var maxIndices = [0];
+    var currentMaxIndex = 0;
+
+    for (var i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {
+        maxIndices = [i];
+        currentMaxIndex = 0;
+        max = arr[i];
+      } else if (arr[i] === max) {
+        currentMaxIndex += 1;
+        maxIndices.push(i);
+      }
+    }
+    if (max === 0) {
+      maxIndices = [-1];
+    }
+
+    return maxIndices;
+  }
+
+  const determineMaxAnecdote = () => {
+    const maxIndices = indexOfMax(votes);
+    let message = "";
+    if (maxIndices[0] === -1) {
+      message = "No votes submitted yet!"; 
+    } else if (maxIndices.length > 1) {
+      message = "The anecdotes with the maximum length are: ";
+      for (let i = 0; i < maxIndices.length; i++) {
+        message += '"' + anecdotes[i] + '", '
+      }
+    } else {
+      message = 'The anecdote with the maximum length is "' + anecdotes[0] + '"';
+    }
+    return message;
+  }
+  
+  return (
+    <p>{determineMaxAnecdote()}</p>
+  )
+}
+
 
 const App = () => {
   const anecdotes = [
@@ -42,6 +90,7 @@ const App = () => {
    
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(initialVotes);
+  const [maxVotes, setMax] = useState([-1]);
 
   return (
     <div>
@@ -50,6 +99,8 @@ const App = () => {
       <p>Current votes: {votes[selected]}</p>
       <SelectButton selected={selected} setSelected={setSelected} length={anecdotes.length}/>
       <VoteButton currentVotes={votes} setVotes={setVotes} currentAnecdote={selected} />
+      <h1>Anecdote with most votes</h1>
+      <DisplayMaxAnecdotes votes={votes} anecdotes={anecdotes}/>
     </div>
   )
 }
