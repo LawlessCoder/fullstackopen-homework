@@ -27,9 +27,9 @@ const App = () => {
   const [bad, setBad] = useState(0);
 
   const states = [
-    { state: good, setter: setGood, text: "good" },
-    { state: neutral, setter: setNeutral, text: "neutral" },
-    { state: bad, setter: setBad, text: "bad" },
+    { value: good, setter: setGood, text: "good" },
+    { value: neutral, setter: setNeutral, text: "neutral" },
+    { value: bad, setter: setBad, text: "bad" },
   ];
 
   return (
