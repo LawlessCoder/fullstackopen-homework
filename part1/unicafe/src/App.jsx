@@ -22,9 +22,10 @@ const Button = ({ setState, currentState, buttonText }) => {
 
 const StatisticLine = ({ text, value }) => {
   return (
-    <p>
-      {text} {value}
-    </p>
+    <tr>
+      <th scope="row">{text}</th>
+      <td>{value}</td>
+    </tr>
   );
 };
 
@@ -33,7 +34,8 @@ const Statistics = ({ states }) => {
 
   let average = null;
   let percentPositive = null;
-  const good = states.find((item) => item.text === "good");
+  const goodItem = states.find((item) => item.text === "good");
+
   if (totalCount === 0) {
     return (
       <>
@@ -45,18 +47,32 @@ const Statistics = ({ states }) => {
     average =
       states.reduce((total, item) => item.value * item.weight + total, 0) /
       totalCount;
-    percentPositive = (good.value * 100) / totalCount + " %";
+    percentPositive = (goodItem.value * 100) / totalCount + " %";
   }
 
   return (
     <>
       <h1>statistics</h1>
-      {states.map((item) => (
-        <StatisticLine key={item.text} text={item.text} value={item.value} />
-      ))}
-      <StatisticLine text={"all"} value={totalCount} />
-      <StatisticLine text={"average"} value={average} />
-      <StatisticLine text={"positive"} value={percentPositive} />
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Statistic</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {states.map((item) => (
+            <StatisticLine
+              key={item.text}
+              text={item.text}
+              value={item.value}
+            />
+          ))}
+          <StatisticLine text={"all"} value={totalCount} />
+          <StatisticLine text={"average"} value={average} />
+          <StatisticLine text={"positive"} value={percentPositive} />
+        </tbody>
+      </table>
     </>
   );
 };
