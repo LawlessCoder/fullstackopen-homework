@@ -92,7 +92,6 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(initialVotes);
-  const [maxVotes, setMax] = useState([-1]);
 
   return (
     <div>
