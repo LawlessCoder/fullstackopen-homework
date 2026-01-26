@@ -35,8 +35,12 @@ const Statistics = ({ states }) => {
   let percentPositive = null;
   const good = states.find((item) => item.text === "good");
   if (totalCount === 0) {
-    average = 0;
-    percentPositive = 0;
+    return (
+      <>
+        <h1>statistics</h1>
+        <p>No feedback given</p>
+      </>
+    );
   } else {
     average =
       states.reduce((total, item) => item.value * item.weight + total, 0) /
