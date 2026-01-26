@@ -20,6 +20,25 @@ const Button = ({ setState, currentState, buttonText }) => {
   return <button onClick={handleClick}>{buttonText}</button>;
 };
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <p>
+      {text} {value}
+    </p>
+  );
+};
+
+const Statistics = ({ states }) => {
+  return (
+    <>
+      <h1>statistics</h1>
+      {states.map((item) => (
+        <StatisticLine key={item.text} text={item.text} value={item.value} />
+      ))}
+    </>
+  );
+};
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0);
@@ -36,6 +55,7 @@ const App = () => {
     <div>
       <h1>give feedback</h1>
       <VotingStation states={states} />
+      <Statistics states={states} />
     </div>
   );
 };
