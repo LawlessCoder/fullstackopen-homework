@@ -29,12 +29,30 @@ const StatisticLine = ({ text, value }) => {
 };
 
 const Statistics = ({ states }) => {
+  const totalCount = states.reduce((total, item) => item.value + total, 0);
+
+  let average = null;
+  let percentPositive = null;
+  const good = states.find((item) => item.text === "good");
+  if (totalCount === 0) {
+    average = 0;
+    percentPositive = 0;
+  } else {
+    average =
+      states.reduce((total, item) => item.value * item.weight + total, 0) /
+      totalCount;
+    percentPositive = (good.value * 100) / totalCount + " %";
+  }
+
   return (
     <>
       <h1>statistics</h1>
       {states.map((item) => (
         <StatisticLine key={item.text} text={item.text} value={item.value} />
       ))}
+      <StatisticLine text={"all"} value={totalCount} />
+      <StatisticLine text={"average"} value={average} />
+      <StatisticLine text={"positive"} value={percentPositive} />
     </>
   );
 };
@@ -46,9 +64,9 @@ const App = () => {
   const [bad, setBad] = useState(0);
 
   const states = [
-    { value: good, setter: setGood, text: "good" },
-    { value: neutral, setter: setNeutral, text: "neutral" },
-    { value: bad, setter: setBad, text: "bad" },
+    { value: good, setter: setGood, text: "good", weight: 1 },
+    { value: neutral, setter: setNeutral, text: "neutral", weight: 0 },
+    { value: bad, setter: setBad, text: "bad", weight: -1 },
   ];
 
   return (
