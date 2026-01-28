@@ -7,9 +7,7 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault();
 
-    const personInPhonebook = persons.find((person) => person.name === newName)
-      ? true
-      : false;
+    const personInPhonebook = persons.find((person) => person.name === newName);
 
     if (personInPhonebook) {
       alert(`${newName} is already in phonebook`);
