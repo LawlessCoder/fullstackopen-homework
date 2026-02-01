@@ -17,13 +17,21 @@ const PersonForm = (props) => {
     }
   };
 
+  const handleNameChange = (event) => {
+    props.setNewName(event.target.value);
+  };
+
+  const handleNumberChange = (event) => {
+    props.setNewNumber(event.target.value);
+  };
+
   return (
       <form onSubmit={handleSubmit}>
         <div>
-          name: <input value={props.newName} onChange={props.handleNameChange} />
+          name: <input value={props.newName} onChange={handleNameChange} />
         </div>
         <div>
-          number: <input value={props.newNumber} onChange={props.handleNumberChange} />
+          number: <input value={props.newNumber} onChange={handleNumberChange} />
         </div>
         <div>
           <button type="submit">add</button>

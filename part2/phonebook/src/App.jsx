@@ -19,20 +19,13 @@ const App = () => {
        })
    },[])
 
-  const handleNameChange = (event) => {
-    setNewName(event.target.value);
-  };
-
-  const handleNumberChange = (event) => {
-    setNewNumber(event.target.value);
-  };
   
   return (
     <div>
       <h2>Phonebook</h2>
       <Filter searchFilter={searchFilter} setNewFilter={setNewFilter} />
       <h2>add a new</h2>
-      <PersonForm newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} persons={persons} setPersons={setPersons} />
+      <PersonForm newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons} />
       <h2>Numbers</h2>
       <Persons persons={persons} searchFilter={searchFilter} />
     </div>
