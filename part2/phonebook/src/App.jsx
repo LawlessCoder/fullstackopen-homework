@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Filter from "../components/Filter";
 import PersonForm from "../components/PersonForm";
 import Persons from "../components/Persons";
 
 const App = () => {
-  const [persons, setPersons] = useState([])
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchFilter, setNewFilter] = useState("");
@@ -14,16 +14,14 @@ const App = () => {
   const numbers = { newNumber, setNewNumber };
   const contacts = { persons, setPersons };
 
-  useEffect(
-   () => {
-     axios
-       .get('http://localhost:3001/persons')
-       .then(response => {
-         setPersons(response.data)
-       })
-   },[])
+  // Populate initial contacts from database
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then((response) => {
+      // sets the current state to refresh components
+      setPersons(response.data);
+    });
+  }, []);
 
-  
   return (
     <div>
       <h2>Phonebook</h2>
