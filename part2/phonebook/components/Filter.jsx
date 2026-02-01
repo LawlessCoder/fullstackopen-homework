@@ -3,7 +3,7 @@ const Filter = ({searchFilter, setNewFilter}) => {
     setNewFilter(event.target.value);
   };
 
-  return (
+    return (
     <div>
       filter shown with <input value={searchFilter} onChange={handleSearchChange} />
     </div>
