@@ -10,6 +10,10 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [searchFilter, setNewFilter] = useState("");
 
+  const names = { newName, setNewName };
+  const numbers = { newNumber, setNewNumber };
+  const contacts = { persons, setPersons };
+
   useEffect(
    () => {
      axios
@@ -25,7 +29,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter searchFilter={searchFilter} setNewFilter={setNewFilter} />
       <h2>add a new</h2>
-      <PersonForm newName={newName} setNewName={setNewName} newNumber={newNumber} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons} />
+      <PersonForm names={names} numbers={numbers} contacts={contacts} />
       <h2>Numbers</h2>
       <Persons persons={persons} searchFilter={searchFilter} />
     </div>

@@ -1,37 +1,37 @@
-const PersonForm = (props) => {
+const PersonForm = ({ names, numbers, contacts }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const personInPhonebook = props.persons.find((person) => person.name === props.newName);
+    const personInPhonebook = contacts.persons.find((person) => person.name === names.newName);
 
     if (personInPhonebook) {
-      alert(`${props.newName} is already in phonebook`);
+      alert(`${names.newName} is already in phonebook`);
     } else {
       const newPerson = {
-        name: props.newName,
-        number: props.newNumber,
+        name: names.newName,
+        number: numbers.newNumber,
       };
-      props.setPersons(props.persons.concat(newPerson));
-      props.setNewName("");
-      props.setNewNumber("");
+      contacts.setPersons(contacts.persons.concat(newPerson));
+      names.setNewName("");
+      numbers.setNewNumber("");
     }
   };
 
   const handleNameChange = (event) => {
-    props.setNewName(event.target.value);
+    names.setNewName(event.target.value);
   };
 
   const handleNumberChange = (event) => {
-    props.setNewNumber(event.target.value);
+    numbers.setNewNumber(event.target.value);
   };
 
   return (
       <form onSubmit={handleSubmit}>
         <div>
-          name: <input value={props.newName} onChange={handleNameChange} />
+          name: <input value={names.newName} onChange={handleNameChange} />
         </div>
         <div>
-          number: <input value={props.newNumber} onChange={handleNumberChange} />
+          number: <input value={numbers.newNumber} onChange={handleNumberChange} />
         </div>
         <div>
           <button type="submit">add</button>
