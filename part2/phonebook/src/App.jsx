@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import personService from "./services/persons";
+
 import Filter from "../components/Filter";
 import PersonForm from "../components/PersonForm";
 import Persons from "../components/Persons";
@@ -16,9 +17,8 @@ const App = () => {
 
   // Populate initial contacts from database
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      // sets the current state to refresh components
-      setPersons(response.data);
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
     });
   }, []);
 
