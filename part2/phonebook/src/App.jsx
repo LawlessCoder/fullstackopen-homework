@@ -29,7 +29,7 @@ const App = () => {
       <h2>add a new</h2>
       <PersonForm names={names} numbers={numbers} contacts={contacts} />
       <h2>Numbers</h2>
-      <Persons persons={persons} searchFilter={searchFilter} />
+      <Persons contacts={contacts} searchFilter={searchFilter} />
     </div>
   );
 };
