@@ -1,4 +1,3 @@
-import axios from "axios";
 import personService from "../src/services/persons";
 
 const PersonForm = ({ names, numbers, contacts }) => {
