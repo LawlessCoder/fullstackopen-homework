@@ -1,6 +1,13 @@
-import personService from "../src/services/persons";
+import personService from "../services/persons";
+import { useEffect } from "react";
 
-const PersonForm = ({ names, numbers, contacts }) => {
+const PersonForm = ({ names, numbers, contacts, setNotification }) => {
+  useEffect(() => {
+    personService.getAll().then((databasePersons) => {
+      contacts.setPersons(databasePersons);
+    });
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -16,8 +23,9 @@ const PersonForm = ({ names, numbers, contacts }) => {
           number: numbers.newNumber,
         };
         personService
-          .update(personInPhonebook.id, personInPhonebook)
+          .update(updatedPerson.id, updatedPerson)
           .then(() => {
+            console.log(updatedPerson.name);
             const updatedPersons = contacts.persons.map((currentPerson) => {
               if (currentPerson.id === updatedPerson.id) {
                 return updatedPerson;
@@ -26,6 +34,21 @@ const PersonForm = ({ names, numbers, contacts }) => {
               }
             });
             contacts.setPersons(updatedPersons);
+            setNotification(
+              `Updated ${updatedPerson.name}'s number to ${updatedPerson.number}`,
+            );
+
+            setTimeout(() => {
+              setNotification(null);
+            }, 5000);
+          })
+          .catch((error) => {
+            setNotification(
+              `Error updating ${updatedPerson.name} in phonebook`,
+            );
+            setTimeout(() => {
+              setNotification(null);
+            }, 5000);
           });
       } else {
         return;
@@ -38,7 +61,19 @@ const PersonForm = ({ names, numbers, contacts }) => {
 
       personService
         .create(newPerson)
-        .then((responseData) => console.log(responseData));
+        .then(() => {
+          setNotification(`Added ${newPerson.name} to phonebook.`);
+          setTimeout(() => {
+            setNotification(null);
+          }, 5000);
+        })
+        .catch((error) => {
+          console.log(error);
+          setNotification(`Error adding ${newPerson.name} to phonebook`);
+          setTimeout(() => {
+            setNotification(null);
+          }, 5000);
+        });
 
       contacts.setPersons(contacts.persons.concat(newPerson));
       names.setNewName("");

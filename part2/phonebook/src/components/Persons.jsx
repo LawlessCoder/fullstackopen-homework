@@ -1,4 +1,4 @@
-import personService from "../src/services/persons.js";
+import personService from "../services/persons.js";
 
 const Persons = ({ contacts, searchFilter }) => {
   const deletePerson = ({ person }) => {

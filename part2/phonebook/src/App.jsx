@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import personService from "./services/persons";
 
-import Filter from "../components/Filter";
-import PersonForm from "../components/PersonForm";
-import Persons from "../components/Persons";
-import Notification from "../components/Notification";
+import Filter from "./components/Filter";
+import PersonForm from "./components/PersonForm";
+import Persons from "./components/Persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchFilter, setNewFilter] = useState("");
-  const [errorMessage, setErrorMessage] = useState("some error happened...");
+  const [notification, setNotification] = useState(null);
 
   const names = { newName, setNewName };
   const numbers = { newNumber, setNewNumber };
@@ -26,11 +26,16 @@ const App = () => {
 
   return (
     <div>
-      <Notification message={errorMessage} />
+      <Notification message={notification} />
       <h2>Phonebook</h2>
       <Filter searchFilter={searchFilter} setNewFilter={setNewFilter} />
       <h2>add a new</h2>
-      <PersonForm names={names} numbers={numbers} contacts={contacts} />
+      <PersonForm
+        names={names}
+        numbers={numbers}
+        contacts={contacts}
+        setNotification={setNotification}
+      />
       <h2>Numbers</h2>
       <Persons contacts={contacts} searchFilter={searchFilter} />
     </div>
