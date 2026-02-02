@@ -2,12 +2,6 @@ import personService from "../services/persons";
 import { useEffect } from "react";
 
 const PersonForm = ({ names, numbers, contacts, setNotification }) => {
-  useEffect(() => {
-    personService.getAll().then((databasePersons) => {
-      contacts.setPersons(databasePersons);
-    });
-  });
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -61,6 +55,9 @@ const PersonForm = ({ names, numbers, contacts, setNotification }) => {
       personService
         .create(newPerson)
         .then(() => {
+          personService.getAll().then((databasePersons) => {
+            contacts.setPersons(databasePersons);
+          });
           setNotification(`Added ${newPerson.name} to phonebook.`);
           setTimeout(() => {
             setNotification(null);
@@ -73,7 +70,6 @@ const PersonForm = ({ names, numbers, contacts, setNotification }) => {
           }, 5000);
         });
 
-      contacts.setPersons(contacts.persons.concat(newPerson));
       names.setNewName("");
       numbers.setNewNumber("");
     }
