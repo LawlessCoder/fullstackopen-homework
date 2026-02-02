@@ -9,7 +9,27 @@ const PersonForm = ({ names, numbers, contacts }) => {
     );
 
     if (personInPhonebook) {
-      alert(`${names.newName} is already in phonebook`);
+      const message = `${names.newName} is already in phonebook, replace the old number with a new one?`;
+      if (window.confirm(message)) {
+        const updatedPerson = {
+          ...personInPhonebook,
+          number: numbers.newNumber,
+        };
+        personService
+          .update(personInPhonebook.id, personInPhonebook)
+          .then(() => {
+            const updatedPersons = contacts.persons.map((currentPerson) => {
+              if (currentPerson.id === updatedPerson.id) {
+                return updatedPerson;
+              } else {
+                return currentPerson;
+              }
+            });
+            contacts.setPersons(updatedPersons);
+          });
+      } else {
+        return;
+      }
     } else {
       const newPerson = {
         name: names.newName,
