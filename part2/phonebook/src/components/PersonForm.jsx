@@ -25,7 +25,6 @@ const PersonForm = ({ names, numbers, contacts, setNotification }) => {
         personService
           .update(updatedPerson.id, updatedPerson)
           .then(() => {
-            console.log(updatedPerson.name);
             const updatedPersons = contacts.persons.map((currentPerson) => {
               if (currentPerson.id === updatedPerson.id) {
                 return updatedPerson;
@@ -42,7 +41,7 @@ const PersonForm = ({ names, numbers, contacts, setNotification }) => {
               setNotification(null);
             }, 5000);
           })
-          .catch((error) => {
+          .catch(() => {
             setNotification(
               `Error updating ${updatedPerson.name} in phonebook`,
             );
@@ -67,8 +66,7 @@ const PersonForm = ({ names, numbers, contacts, setNotification }) => {
             setNotification(null);
           }, 5000);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
           setNotification(`Error adding ${newPerson.name} to phonebook`);
           setTimeout(() => {
             setNotification(null);
