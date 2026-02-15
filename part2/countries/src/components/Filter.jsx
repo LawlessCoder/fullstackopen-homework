@@ -1,7 +1,7 @@
-const Filter = ({text, searchFilter, setNewFilter}) => {
+const Filter = ({ text, searchFilter, setNewFilter, setCountryToShow }) => {
   const handleSearchChange = (event) => {
+    setCountryToShow(null);
     setNewFilter(event.target.value);
-    console.log("New filter!")
   };
 
     return (
